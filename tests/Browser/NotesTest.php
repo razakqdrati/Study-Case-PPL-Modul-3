@@ -1,0 +1,27 @@
+<?php
+
+namespace Tests\Browser;
+
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+
+class NotesTest extends DuskTestCase
+{
+    /**
+     * A Dusk test example.
+     */
+    public function testExample(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertSee('Enterprise')
+                    ->clicklink('Notes')
+                    ->assertPathIs(('/makenote'))
+                    ->type('Note name', 'Note')
+                    ->type('isi', 'Note ini berisi..')
+                    ->press('Simpan')
+                    ->assertPathIs('/dashboard');
+        });
+    }
+}
